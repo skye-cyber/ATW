@@ -22,8 +22,8 @@ Most API clients tell you a status code. They do not tell you whether a `200` is
 Requires Node 20+ and npm 10+.
 
 ```bash
-git clone <repo>
-cd atw
+git clone https://github.com/skye-cyber/ATW
+cd ATW
 npm install
 npm run dev
 ```
