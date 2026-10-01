@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atw.local/schemas/result.v1.json",
+  "title": "API Test Workbench — Result Row",
+  "description": "A single recorded test result. Produced by the send() path, the probe runner, manual entry, or import. This is the primary shape for exports (JSON/CSV/Markdown) and the results table.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["method", "path", "verdict", "timestamp"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Assigned by the result store on insert. Not present in exported rows until merged."
+    },
+    "method": {
+      "type": "string",
+      "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Route path as declared, e.g. /api/v1/users/{id}/profile"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["guest", "user", "premium", "admin", ""],
+      "default": "",
+      "description": "Role used for this request. Empty when no role was applied."
+    },
+    "status": {
+      "oneOf": [
+        { "type": "integer", "minimum": 100, "maximum": 599 },
+        { "type": "string", "enum": ["ERR", "—", "matrix"] }
+      ],
+      "description": "HTTP status, or one of the sentinel strings: ERR (network error), — (manual entry), matrix (imported authz matrix row)."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "MANUAL", "PARTIAL", "BLOCKED"]
+    },
+    "category": {
+      "type": "string",
+      "description": "Free-form. Common values: Functional, Contract, Negative, AuthZ, AuthN, Injection, Headers, Protocol, RateLimit, Manual, AuthZ Matrix."
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info", "-"],
+      "default": "-"
+    },
+    "duration": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Round-trip time in milliseconds. 0 for manual entries."
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
+    },
+    "probe": {
+      "type": "string",
+      "default": "",
+      "description": "Legacy free-form label (e.g. 'smoke', 'matrix:user'). Prefer probeId for structured probes."
+    },
+    "probeId": {
+      "type": "string",
+      "description": "Structured probe identifier, e.g. 'inj.sqli'. Present when the row came from a probe run."
+    },
+    "variantId": {
+      "type": "string",
+      "description": "Structured variant identifier, e.g. 'sqli.error-based'."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Graded findings produced by probe detection. Empty or absent for plain requests.",
+      "items": { "$ref": "https://atw.local/schemas/finding.v1.json" }
+    },
+    "evidence": {
+      "oneOf": [
+        { "$ref": "https://atw.local/schemas/evidence.v1.json" },
+        { "type": "null" }
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info", "-"]
+    }
+  }
+}

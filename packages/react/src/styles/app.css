@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* ── surfaces & text (light) ── */
+  --color-bg:        #f4f6fb;
+  --color-bg-elev:   #ffffff;
+  --color-bg-inset:  #f1f5f9;
+  --color-border:    #d9dee8;
+  --color-border-strong: #b8c0cf;
+  --color-text:      #172033;
+  --color-text-muted:#667085;
+
+  /* ── accents (light) ── */
+  --color-accent:    #2563eb;
+  --color-accent-bg: #eff6ff;
+  --color-ok:        #059669;
+  --color-ok-bg:     #ecfdf5;
+  --color-warn:      #d97706;
+  --color-warn-bg:   #fffbeb;
+  --color-danger:    #b42318;
+  --color-danger-bg: #fef2f2;
+  --color-purple:    #7c3aed;
+  --color-purple-bg: #ede9fe;
+
+  --color-brand-bg:      #14264b;
+  --color-brand-fg:      #f9f9f9;
+  --color-brand-accent:  #2563eb;
+  --color-brand-border:  #c8d0dd;
+  --color-brand-hover:   #1e3b74;
+
+  /* ── http methods (light) ── */
+  --color-get:       #087f5b;
+  --color-post:      #b45309;
+  --color-put:       #6d28d9;
+  --color-patch:     #6d28d9;
+  --color-delete:    #b42318;
+  --color-head:      #667085;
+  --color-options:   #667085;
+
+  /* ── roles (light) ── */
+  --color-role-guest-bg:   #f3f4f6;  --color-role-guest-fg:   #374151;
+  --color-role-user-bg:    #dbeafe;  --color-role-user-fg:    #1e40af;
+  --color-role-premium-bg: #ede9fe;  --color-role-premium-fg: #5b21b6;
+  --color-role-admin-bg:   #fee2e2;  --color-role-admin-fg:   #991b1b;
+
+  /* ── typography ── */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+[data-theme="dark"] {
+  --color-bg:            #0a0e14;
+  --color-bg-elev:       #161b22;
+  --color-bg-inset:      #0d1117;
+  --color-border:        #2a3038;
+  --color-border-strong: #3d444d;
+  --color-text:          #e6edf3;
+  --color-text-muted:    #8b949e;
+
+  --color-brand-bg:      #14264b;
+  --color-brand-fg:      #e6edf3;
+  --color-brand-accent:  #4c8dff;
+  --color-brand-border:  rgba(255,255,255,0.15);
+  --color-brand-hover:   rgba(255,255,255,0.10);
+
+  --color-accent:    #4c8dff;
+  --color-accent-bg: #1c2d4a;
+  --color-ok:        #3fb950;  --color-ok-bg:     #12261a;
+  --color-warn:      #d29922;  --color-warn-bg:   #2a1f0a;
+  --color-danger:    #f85149;  --color-danger-bg: #2d1214;
+  --color-purple:    #a371f7;  --color-purple-bg: #1f1633;
+
+  --color-get:     #3fb950;
+  --color-post:    #d29922;
+  --color-put:     #a371f7;
+  --color-patch:   #a371f7;
+  --color-delete:  #f85149;
+  --color-head:    #8b949e;
+  --color-options: #8b949e;
+
+  --color-role-guest-bg:   #1f242c;  --color-role-guest-fg:   #c9d1d9;
+  --color-role-user-bg:    #1c2d4a;  --color-role-user-fg:    #a8c8ff;
+  --color-role-premium-bg: #1f1633;  --color-role-premium-fg: #c9a8ff;
+  --color-role-admin-bg:   #2d1214;  --color-role-admin-fg:   #ffb3ad;
+}
+
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── custom utilities ───────────────────────────────────────────── */
+
+@utility method-* {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.375rem;
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background-color: --value(--color-*);
+}
+
+@utility sev-* {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  background-color: --value(--color-*-bg);
+  color: --value(--color-*);
+}
+
+@utility role-* {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  background-color: --value(--color-role-*-bg);
+  color: --value(--color-role-*-fg);
+}
+
+@utility heat-* {
+  display: inline-block;
+  min-width: 2.25rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: --value(--color-*-bg);
+  color: --value(--color-*);
+}

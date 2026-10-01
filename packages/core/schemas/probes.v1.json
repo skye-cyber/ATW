@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atw.local/schemas/probe-config.v1.json",
+  "title": "API Test Workbench — Probe Config",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["enabled"],
+  "additionalProperties": false,
+  "properties": {
+    "enabled": { "type": "boolean" },
+    "severityOverride": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"]
+    },
+    "payloads": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "count": { "type": "integer", "minimum": 1 },
+    "delayMs": { "type": "integer", "minimum": 0 },
+    "extraVars": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

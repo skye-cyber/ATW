@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atw.local/schemas/evidence.v1.json",
+  "title": "API Test Workbench — Evidence Packet",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["timestamp"],
+  "additionalProperties": false,
+  "properties": {
+    "url": { "type": "string" },
+    "requestHeaders": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": { "type": "string" } },
+        { "type": "null" }
+      ]
+    },
+    "requestBody": {
+      "oneOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "status": { "type": "integer" },
+    "statusText": { "type": "string" },
+    "responseHeaders": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "string" }
+          }
+        },
+        { "type": "object", "additionalProperties": { "type": "string" } },
+        { "type": "null" }
+      ]
+    },
+    "responseBody": {
+      "oneOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "error": { "type": "string" },
+    "note": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" }
+  }
+}

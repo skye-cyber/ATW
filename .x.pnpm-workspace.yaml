@@ -1,0 +1,7 @@
+packages:
+  - "packages/*"
+  - '!**/node_modules'
+  - '!**/dist'
+allowBuilds:
+  esbuild: true
+  esbuild@0.27.7: true

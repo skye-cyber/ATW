@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atw.local/schemas/finding.v1.json",
+  "title": "API Test Workbench — Probe Finding",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["variantId", "probeId", "verdict", "severity", "confidence", "evidence"],
+  "additionalProperties": false,
+  "properties": {
+    "variantId": { "type": "string", "minLength": 1 },
+    "probeId": { "type": "string", "minLength": 1 },
+    "probeLabel": { "type": "string" },
+    "group": {
+      "type": "string",
+      "enum": ["authz", "authn", "method", "injection", "headers", "protocol", "ratelimit"]
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["CONFIRMED", "LIKELY", "SUSPECTED", "INFO"]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "info"]
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "evidence": { "type": "string" },
+    "diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "statusBefore": { "type": "integer" },
+        "statusAfter": { "type": "integer" },
+        "timeBefore": { "type": "integer" },
+        "timeAfter": { "type": "integer" },
+        "lengthBefore": { "type": "integer" },
+        "lengthAfter": { "type": "integer" },
+        "reflectedPayload": { "type": "string" }
+      }
+    },
+    "requestUrl": { "type": "string" },
+    "requestMethod": {
+      "type": "string",
+      "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
+    },
+    "requestBody": { "type": "string" },
+    "responseSnippet": { "type": "string" }
+  }
+}

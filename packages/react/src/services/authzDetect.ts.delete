@@ -1,0 +1,33 @@
+import type { MatrixRow } from "../store/matrix";
+export { detectAuthzIssue, type AuthzFlag, type AuthzMatrixRow } from "@atw/core";
+
+// export interface AuthzFlag {
+//   text: string;
+//   severity: "critical" | "high" | "medium" | "low" | "info";
+// }
+
+export function detectAuthzIssue(row: MatrixRow): AuthzFlag | null {
+  const { roles, method, path } = row;
+  const g = roles.guest;
+  const u = roles.user;
+  const a = roles.admin;
+
+  const isOk = (v: number | "ERR" | undefined): boolean =>
+    typeof v === "number" && v >= 200 && v < 300;
+  const isAdminPath = /admin|internal/i.test(path);
+  const isWrite = ["POST", "PUT", "PATCH", "DELETE"].includes(method);
+
+  if (isOk(g) && isAdminPath) {
+    return { text: "Guest on admin route", severity: "high" };
+  }
+  if (isOk(g) && isWrite) {
+    return { text: "Guest can write (BFLA?)", severity: "medium" };
+  }
+  if (isOk(u) && isAdminPath && isOk(a)) {
+    return { text: "User on admin route", severity: "high" };
+  }
+  if (typeof a === "number" && a >= 500) {
+    return { text: "Server error on admin role", severity: "medium" };
+  }
+  return null;
+}

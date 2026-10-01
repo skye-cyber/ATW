@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://atw.local/schemas/matrix.v1.json",
+  "title": "API Test Workbench — AuthZ Matrix Row",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["method", "path"],
+  "additionalProperties": false,
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
+    },
+    "path": { "type": "string", "minLength": 1 },
+    "guest": {
+      "oneOf": [
+        { "type": "integer", "minimum": 100, "maximum": 599 },
+        { "type": "string", "enum": ["ERR"] }
+      ]
+    },
+    "user": {
+      "oneOf": [
+        { "type": "integer", "minimum": 100, "maximum": 599 },
+        { "type": "string", "enum": ["ERR"] }
+      ]
+    },
+    "premium": {
+      "oneOf": [
+        { "type": "integer", "minimum": 100, "maximum": 599 },
+        { "type": "string", "enum": ["ERR"] }
+      ]
+    },
+    "admin": {
+      "oneOf": [
+        { "type": "integer", "minimum": 100, "maximum": 599 },
+        { "type": "string", "enum": ["ERR"] }
+      ]
+    },
+    "flag": { "type": "string" }
+  }
+}
