@@ -216,7 +216,7 @@ export function ProbeDrawer({ instance }: Props): JSX.Element {
                                         type="button"
                                         onClick={() => runGroup(g)}
                                         disabled={groupBusy || busy !== null || enabled === 0}
-                                        className="ml-auto rounded border border-[var(--color-border)] px-2 py-0.5 text-[11px] hover:bg-gray-300 dark:hover:bg-gray-800"
+                                        className="ml-auto rounded border border-[var(--color-border)] px-2 py-0.5 text-[11px] hover:bg-gray-300 dark:hover:bg-gray-800 cursor-pointer hover:scale-[95%] transition-transform duartion-300"
                                     >
                                         {groupBusy ? "Running…" : "Run group"}
                                     </button>
@@ -252,7 +252,7 @@ export function ProbeDrawer({ instance }: Props): JSX.Element {
                         type="button"
                         onClick={runAll}
                         disabled={busy !== null || enabledCount === 0}
-                        className="rounded-md bg-[var(--color-purple)] text-white px-3 py-1 text-xs font-medium"
+                        className="rounded-md bg-[var(--color-purple)] text-white px-3 py-1 text-xs font-medium cursor-pointer hover:scale-[95%] transition-transform duartion-300"
                     >
                         {busy === "all" ? "Running all…" : `Run all enabled (${enabledCount})`}
                     </button>

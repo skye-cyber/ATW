@@ -95,7 +95,7 @@ function ResultRow({ row, onRemove }: { row: ResultRow; onRemove(): void }): JSX
             </td>
             <td className="px-2 py-1">{row.status}</td>
             <td className="px-2 py-1">
-                <span className={cn("badge", cls)}>{row.verdict}</span>
+                <span className={cn(`badge ${row.verdict == 'PASS' ? 'sev-ok' : 'sev-danger'}`, cls)}>{row.verdict}</span>
             </td>
             <td className="px-2 py-1">{row.category}</td>
             <td className="px-2 py-1">
@@ -107,7 +107,7 @@ function ResultRow({ row, onRemove }: { row: ResultRow; onRemove(): void }): JSX
                 <button
                     type="button"
                     onClick={onRemove}
-                    className="text-[var(--color-danger)] font-bold"
+                    className="text-[var(--color-danger)] font-bold border border-gray-300 dark:border-gray-700 p-1 cursor-pointer hover:scale-[90%] "
                     aria-label="Remove"
                 >
                     ✕
