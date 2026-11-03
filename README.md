@@ -178,6 +178,9 @@ npm run check:tailwind # Tailwind contract guard
 - **`@atw/core`** has zero React and zero DOM. HTTP is injected, so probe logic is testable in isolation. It owns the probe registry, detection helpers, interpolation, import parsing, export formatting, and the versioned JSON schemas for every boundary shape.
 - **`@atw/react`** is presentation only. Stores are Zustand slices. HTTP goes through core's client; no `fetch` in components. Styling is Tailwind 4 with `@theme` tokens; no dynamic class strings.
 
+### Preview
+![previewLight.png](packages/docs/previewLight.png "ui preview")
+
 ### Conventions
 
 - TypeScript throughout. Strict mode on.

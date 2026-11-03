@@ -1,6 +1,6 @@
 # Tailwind CSS 4 Integration Contract
 
-This document mirrors ADR 0002 and is the operational reference for anyone
+This document mirrors ATW 0002 and is the operational reference for anyone
 touching `packages/app/src/styles/app.css` or any file under
 `packages/react/src` or `packages/app/src`.
 

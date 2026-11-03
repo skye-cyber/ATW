@@ -1,4 +1,4 @@
-# ADR 0004 — Versioned JSON schemas for boundary shapes
+# ATW 0004 — Versioned JSON schemas for boundary shapes
 
 - **Status**: accepted
 - **Date**: 2026-09-30
@@ -89,5 +89,5 @@ Rules:
 - `packages/core/schemas/*.v1.json`
 - `packages/core/tests/schemas.test.ts`
 - HANDOFF.md
-- ADR 0001 — why schemas live in `core`
+- ATW 0001 — why schemas live in `core`
 
